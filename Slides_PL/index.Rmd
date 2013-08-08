@@ -103,3 +103,65 @@ M <- gvisMotionChart(tmp.df,
 print(M, tag='chart')
 ```
 
+---
+### Test of ggplot2 Animation
+
+```{r echo=FALSE, cache=FALSE, message=FALSE,warning=FALSE,fig.keep='none'}
+suppressWarnings(source("gmdata.R"))
+
+continentCols <- cols$colours
+names(continentCols) <- cols$continent
+
+
+#install.packages("gridSVG", repos="http://R-Forge.R-project.org")
+
+
+library(ggplot2)
+library(gridSVG)
+
+suppressWarnings(source("ggplotScale.R"))
+
+# Single-panel qplot
+###########################
+print(
+ggplot(data=all) +
+      geom_point(aes(x=X1950.x, y=X1950.y, size=radius,                    
+                     colour=continent),
+                 shape=16, alpha=.5) +
+      scale_x_continuous(limits=c(1, 9),
+                         name="Fertility\n(# children per woman)") +
+      scale_y_continuous(limits=c(10, 90),
+                         name="Life Expectancy (at birth)") +
+      scale_colour_manual(values=continentCols) +
+      theme(legend.position="none") #+
+      #scale_size(to=c(1, 20))
+)
+
+xCols <- grep("[.]x$", names(all))
+yCols <- grep("[.]y$", names(all))
+
+# Try to animate
+grid.set("geom_point", grep=TRUE,
+         animateGrob(grid.get("geom_point", grep=TRUE),
+                     duration=20,
+                     x=t(ggplotScaleX(as.matrix(all[xCols]),
+                                      1, 9)),
+                     y=t(ggplotScaleY(as.matrix(all[yCols]),
+                                      10, 90))))
+
+#gridToSVG("gapminderOnePanel.svg")
+
+mysvg <- grid.export("test1.svg",addClasses=TRUE)
+```
+
+```{r echo=FALSE, cache=F, results='asis',fig.keep='none'}
+#sink("test1.html")
+cat(saveXML(mysvg$svg))
+#close our file
+#sink(file=NULL)
+```
+
+
+
+
+
