@@ -1,0 +1,106 @@
+---
+title       : Private Label Project 
+subtitle    : Results 
+author      : Richards
+job         : Associate Professor of Awesome
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+ext_widgets     : {rCharts: ["libraries/highcharts", "libraries/nvd3", "libraries/morris", "libraries/dimple", "libraries/Rickshaw"]}           
+widgets     : mathjax    #{quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+---
+
+
+## Read-And-Delete
+
+1. Edit YAML front matter
+2. Write using R Markdown
+3. Use an empty line followed by three dashes to separate slides!
+
+--- .class #id 
+
+## Slide 2
+
+ 
+```{r setup, message = F, echo = F, cache = F}
+require(rCharts)
+knitr::opts_chunk$set(comment = NA, results = 'asis', tidy = F, message = T)
+```
+
+
+```{r external.code, echo=FALSE}
+chunk.dir <- 'c:\\research\\pl\\pl\\chunks\\'
+read_chunk(paste(chunk.dir,"chunks_B.R",sep=""))
+```
+
+```{r load.mcmc.run, echo=FALSE, cache=F}
+```
+
+```{r read.effects, echo=FALSE, cache=F}
+```
+
+---
+### Model 
+
+---
+### Private Label Results: Single Male Households 
+
+```{r echo=FALSE}
+
+np <- length(unique(contrasts$category))
+tmp.plot.df <- subset(contrasts, Group=='Male_HH' & effect.type=='total')
+
+my.hP <- hPlot(mean ~ Effect2, 
+               data=tmp.plot.df, 
+               group='group.name',
+               type='line',
+               title='Change in PL share compared to 18-34 Age group',
+               subtitle='115 Category Groups',
+               radius=0)
+my.hP$plotOptions(line = list(cursor = 'pointer',point = list(events = list(click = "#! function() { alert ('Category: '+ this.category); } !#"))))
+                    
+my.hP$tooltip(pointFormat='{series.name}',headerFormat='')
+my.hP$legend(enabled = F)
+my.hP$xAxis(categories = c("35-44", "45-54","55-64",'65+'),title='Age')
+my.hP$yAxis(title='Change in PL share')
+          
+tmp2 <- subset(tmp.plot.df[,c('category','medicine','group.name')],!duplicated(category))
+tmp2 <- tmp2[order(tmp2$group.name),]
+
+custom.col <- rep('rgba(223, 83, 83, .3)',np)
+custom.col[tmp2$medicine==TRUE] <- 'rgba(119, 152, 191, .3)'
+my.hP$colors(custom.col) 
+my.hP$chart(height=500,width=900)
+```
+
+<div id ="chart1"></div>
+```{r comment=NA,echo = F, results='asis'}
+my.hP$print('chart1', include_assets=TRUE, cdn = T)
+```
+
+---
+### GoogleVis Test 
+
+
+---
+### Not Working?
+
+```{r echo=FALSE, cache=F, results='asis'}
+
+library(googleVis)
+
+tmp.df <- subset(contrasts,effect.type=='total' & Group=='Male_HH')
+tmp.df <- tmp.df[,c('group.name','Effect2','Effect3','mean','medicine2')]
+
+M <- gvisMotionChart(tmp.df,
+                     idvar="group.name", 
+                     timevar="Effect3",
+                     xvar="Effect2", 
+                     yvar="mean",
+                     colorvar="medicine2",
+                     options=list(width=700, height=600))
+
+print(M, tag='chart')
+```
+
