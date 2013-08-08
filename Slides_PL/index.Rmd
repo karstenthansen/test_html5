@@ -87,8 +87,7 @@ my.hP$print('chart1', include_assets=TRUE, cdn = T)
 ### Not Working?
 
 ```{r echo=FALSE, cache=F, results='asis'}
-
-library(googleVis)
+suppressPackageStartupMessages(library(googleVis))
 
 tmp.df <- subset(contrasts,effect.type=='total' & Group=='Male_HH')
 tmp.df <- tmp.df[,c('group.name','Effect2','Effect3','mean','medicine2')]

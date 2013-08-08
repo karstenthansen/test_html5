@@ -2988,35 +2988,15 @@ mode        : selfcontained # {standalone, draft}
 ---
 ### Not Working?
 
-
-```
-Welcome to googleVis version 0.4.3
-
-Please read the Google API Terms of Use before you use the package:
-https://developers.google.com/terms/
-
-Type ?googleVis to access the overall documentation and
-vignette('googleVis') for the package vignette. You can execute a demo of
-the package via: demo(googleVis)
-
-More information is available on the googleVis project web-site:
-http://code.google.com/p/google-motion-charts-with-r/
-
-Contact: <rvisualisation@gmail.com>
-
-To suppress the this message use:
-suppressPackageStartupMessages(library(googleVis))
-```
-
 <!-- MotionChart generated in R 3.0.1 by googleVis 0.4.3 package -->
-<!-- Wed Aug 07 17:03:40 2013 -->
+<!-- Wed Aug 07 17:29:22 2013 -->
 
 
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataMotionChartID1fcc17b1c2e () {
+function gvisDataMotionChartID1e28197426 () {
   var data = new google.visualization.DataTable();
   var datajson =
 [
@@ -6251,14 +6231,14 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartMotionChartID1fcc17b1c2e() {
-  var data = gvisDataMotionChartID1fcc17b1c2e();
+function drawChartMotionChartID1e28197426() {
+  var data = gvisDataMotionChartID1e28197426();
   var options = {};
 options["width"] =    700;
 options["height"] =    600;
 
      var chart = new google.visualization.MotionChart(
-       document.getElementById('MotionChartID1fcc17b1c2e')
+       document.getElementById('MotionChartID1e28197426')
      );
      chart.draw(data,options);
     
@@ -6282,9 +6262,9 @@ options["height"] =    600;
     pkgs.push(chartid);
 
   // Add the drawChart function to the global list of callbacks
-  callbacks.push(drawChartMotionChartID1fcc17b1c2e);
+  callbacks.push(drawChartMotionChartID1e28197426);
 })();
-function displayChartMotionChartID1fcc17b1c2e() {
+function displayChartMotionChartID1e28197426() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -6308,11 +6288,11 @@ function displayChartMotionChartID1fcc17b1c2e() {
  </script>
  
 <!-- jsChart -->  
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartMotionChartID1fcc17b1c2e"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartMotionChartID1e28197426"></script>
  
 <!-- divChart -->
   
-<div id="MotionChartID1fcc17b1c2e"
+<div id="MotionChartID1e28197426"
   style="width: 700px; height: 600px;">
 </div>
 
